@@ -3,15 +3,38 @@
   "displayName": "Genet: Code Snippet",
   "description": "Easily insert code snippets from a configurable folder into your active editor. Supports recursive folders, multi-language snippets, preview, accessibility, and pagination for large snippet sets.",
   "version": "1.0.0",
+  "publisher": "ecleroux",
+  "author": {
+    "name": "Edwin le Roux"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/ecleroux/genet-code-snippet#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ecleroux/genet-code-snippet.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ecleroux/genet-code-snippet/issues"
+  },
+  "icon": "icon.png",
   "engines": {
     "vscode": "^1.105.0"
   },
   "categories": [
-    "Other"
+    "Snippets"
   ],
-  "activationEvents": [
-    "onCommand:genet-code-snippet.insertCodeSnippet"
+  "keywords": [
+    "snippet",
+    "code-snippet",
+    "insert",
+    "template",
+    "productivity",
+    "multi-folder",
+    "preview",
+    "keyboard-navigation",
+    "pagination"
   ],
+  "activationEvents": [],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
