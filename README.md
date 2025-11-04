@@ -7,7 +7,7 @@ Easily insert code snippets from configurable folders into your active editor. F
 
 ## Demo
 
-![Genet: Code Snippet Demo](./demo.gif)
+![Genet: Code Snippet Demo](./assets/demo.gif)
 
 *Add a GIF here showing the extension in action*
 
