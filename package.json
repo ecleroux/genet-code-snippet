@@ -1,0 +1,57 @@
+{
+  "name": "genet-code-snippet",
+  "displayName": "Genet: Code Snippet",
+  "description": "Easily insert code snippets from a configurable folder into your active editor. Supports recursive folders, multi-language snippets, preview, accessibility, and pagination for large snippet sets.",
+  "version": "1.0.0",
+  "engines": {
+    "vscode": "^1.105.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:genet-code-snippet.insertCodeSnippet"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "genet-code-snippet.insertCodeSnippet",
+        "title": "Genet: Insert Code Snippet"
+      }
+    ],
+    "configuration": {
+      "type": "object",
+      "title": "Genet: Code Snippet",
+      "properties": {
+        "genetCodeSnippet.snippetFolders": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [],
+          "description": "Array of paths to folders containing code snippet files (each supports subfolders). Example: [\"/path/to/snippets\", \"/path/to/more/snippets\"]"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src",
+  "test": "npm run compile && node ./out/test/index.js"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.105.0",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "22.x",
+    "@typescript-eslint/eslint-plugin": "^8.45.0",
+    "@typescript-eslint/parser": "^8.45.0",
+    "eslint": "^9.36.0",
+    "typescript": "^5.9.3",
+    "@vscode/test-cli": "^0.0.11",
+    "@vscode/test-electron": "^2.5.2"
+  }
+}
