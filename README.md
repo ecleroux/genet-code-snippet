@@ -9,8 +9,6 @@ Easily insert code snippets from configurable folders into your active editor. F
 
 ![Genet: Code Snippet Demo](./assets/demo.gif)
 
-*Add a GIF here showing the extension in action*
-
 ## Features
 
 - 📁 **Multiple Snippet Folders** - Configure and use multiple folders with recursive subfolder support
