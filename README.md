@@ -1,6 +1,3 @@
-
-````markdown
-
 # Genet: Code Snippet
 
 Easily insert code snippets from configurable folders into your active editor. Features multi-folder support, live preview, keyboard navigation, and pagination for large snippet collections.
@@ -138,6 +135,3 @@ MIT - See LICENSE file
 ---
 
 **Enjoy using Genet: Code Snippet!**
-
-````
-
