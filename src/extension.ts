@@ -24,18 +24,22 @@ export async function validateSnippetFolders(folderPaths: string[]): Promise<vsc
   const invalidFolders: string[] = [];
 
   for (const folderPath of folderPaths) {
-    if (!folderPath || folderPath.trim() === '') {
-      continue;
-    }
-
-    const folderUri = vscode.Uri.file(folderPath);
-    try {
-      await vscode.workspace.fs.stat(folderUri);
-      validFolders.push(folderUri);
-    } catch (err) {
-      invalidFolders.push(folderPath);
-      console.warn(`Snippet folder not accessible: ${folderPath}`);
-    }
+      if (!folderPath || folderPath.trim() === '') {
+        continue;
+      }
+      // Ignore hidden folders/files (start with .)
+      const parts = folderPath.split(/[\/]/);
+      if (parts.some(p => p.startsWith('.'))) {
+        continue;
+      }
+      const folderUri = vscode.Uri.file(folderPath);
+      try {
+        await vscode.workspace.fs.stat(folderUri);
+        validFolders.push(folderUri);
+      } catch (err) {
+        invalidFolders.push(folderPath);
+        console.warn(`Snippet folder not accessible: ${folderPath}`);
+      }
   }
 
   if (validFolders.length === 0) {
@@ -73,6 +77,11 @@ async function collectSnippetFiles(folderUris: vscode.Uri[]): Promise<Array<{pat
     const files = await getAllFiles(folderUri);
     for (const filePath of files) {
       const relativePath = formatRelativePath(filePath, folderUri);
+      // Skip files with any path segment starting with a dot
+      const segments = relativePath.split(/[\/]/);
+      if (segments.some(seg => seg.startsWith('.'))) {
+        continue;
+      }
       allFiles.push({
         path: relativePath,
         sourceFolder: folderUri.fsPath

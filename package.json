@@ -2,7 +2,7 @@
   "name": "genet-code-snippet",
   "displayName": "Genet: Code Snippet",
   "description": "Easily insert code snippets from a configurable folder into your active editor. Supports recursive folders, multi-language snippets, preview, accessibility, and pagination for large snippet sets.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "publisher": "ecleroux",
   "author": {
     "name": "Edwin le Roux"
