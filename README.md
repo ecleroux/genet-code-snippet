@@ -9,7 +9,8 @@ Easily insert code snippets from configurable folders into your active editor. F
 ## Features
 
 - 📁 **Multiple Snippet Folders** - Configure and use multiple folders with recursive subfolder support
-- 👁️ **Live Preview** - See snippet content before inserting with arrow key navigation
+- � **Smart Search** - Search by filename or folder path for quick snippet discovery
+- �👁️ **Live Preview** - See snippet content before inserting with arrow key navigation
 - ⌨️ **Keyboard Navigation** - Full keyboard support with arrow keys, Enter to select, Esc to cancel
 - 📄 **Syntax Highlighting** - Automatic syntax highlighting for 20+ languages
 - 🔄 **Pagination** - Efficiently browse large collections with 50 items per page
@@ -48,9 +49,17 @@ Press **Cmd+Shift+P** and type **"Genet"** to run `Genet: Insert Code Snippet`
 The extension creates a searchable list of all files in your configured folders:
 
 1. **Navigate** with arrow keys (↑↓)
-2. **Preview** appears below as you navigate
-3. **Insert** by pressing Enter
-4. **Page through** large folders with pagination buttons
+2. **Search** by typing - matches both filename and folder path
+3. **Preview** appears below as you navigate
+4. **Insert** by pressing Enter
+5. **Page through** large folders with pagination buttons (when not searching)
+
+### Search Functionality
+
+Type to search across your snippet collection:
+- Search by **filename**: Type `react` to find `react-hook.ts`
+- Search by **folder path**: Type `python` to find all Python files in `snippets/python/`
+- **Case-insensitive**: Searches ignore case, so `PYTHON` finds `python` files
 
 ### Folder Path Display
 

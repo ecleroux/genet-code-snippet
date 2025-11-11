@@ -267,8 +267,45 @@ export async function handleInsertCodeSnippet(): Promise<void> {
 
   // Create and show QuickPick
   const quickPick = vscode.window.createQuickPick<SnippetItem>();
-  quickPick.items = createPageItems(files, currentPage, PAGE_SIZE);
-  updateQuickPickItems(quickPick, quickPick.items as SnippetItem[], currentPage, totalPages);
+  quickPick.matchOnDescription = true; // Enable filtering on description field
+  let allItems = createPageItems(files, currentPage, PAGE_SIZE);
+  quickPick.items = allItems;
+  updateQuickPickItems(quickPick, allItems, currentPage, totalPages);
+
+  // Handle search input to filter by both label and description
+  quickPick.onDidChangeValue((searchValue) => {
+    if (!searchValue) {
+      allItems = createPageItems(files, currentPage, PAGE_SIZE);
+      updateQuickPickItems(quickPick, allItems, currentPage, totalPages);
+    } else {
+      const lowerSearch = searchValue.toLowerCase();
+      const filtered = files
+        .filter(file => {
+          const fileName = file.path.split(/[\\/]/).pop() || file.path;
+          const folderName = getLastFolderName(file.sourceFolder);
+          const relativePath = file.path;
+          const label = fileName.toLowerCase();
+          const description = `${folderName}/${relativePath}`.toLowerCase();
+          return label.includes(lowerSearch) || description.includes(lowerSearch);
+        })
+        .map(file => {
+          const fileName = file.path.split(/[\\/]/).pop() || file.path;
+          const folderName = getLastFolderName(file.sourceFolder);
+          const relativePath = file.path;
+          const absPath = vscode.Uri.joinPath(vscode.Uri.file(file.sourceFolder), relativePath).fsPath;
+          return {
+            label: fileName,
+            description: `${folderName}/${relativePath}`,
+            detail: '',
+            fullPath: absPath,
+            sourceFolder: file.sourceFolder
+          };
+        });
+      
+      quickPick.items = filtered;
+      quickPick.placeholder = `Select a snippet file to insert (${filtered.length} results). Use ↑/↓ arrows to navigate, Enter to select, Esc to cancel.`;
+    }
+  });
 
   // Handle preview updates with debouncing
   let previewTimeout: NodeJS.Timeout | undefined;
